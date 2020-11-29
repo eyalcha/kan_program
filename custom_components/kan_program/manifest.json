@@ -1,0 +1,9 @@
+{
+  "domain": "kan_program",
+  "name": "Kan Program",
+  "documentation": "https://github.com/eyalcha/kan_program",
+  "requirements": [],
+  "dependencies": [],
+  "codeowners": ["@eyalcha"],
+  "issue_tracker": "https://github.com/eyalcha/kan_program/issues"
+}
