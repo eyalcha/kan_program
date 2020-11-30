@@ -53,11 +53,11 @@ friendly_name: Kan Gimel
 icon: 'mdi:radio'
 ```
 
-# Services
+## Services
 
 The component also exposes the service kan_prohgram.refresh which will refresh all the data.
 
-# Kan Stations id's
+## Kan Stations id's
 
 Id | Station
 ---|---
@@ -72,3 +72,10 @@ Id | Station
 8  | Kan Bet
 9  | Kan Gimel
 10 | Kan
+
+---
+
+I put a lot of work into making this repo and component available and updated to inspire and help others! I will be glad to receive thanks from you — it will give me new strength and add enthusiasm:
+<p align="center"><br>
+<a href="https://paypal.me/eyalco1967?locale.x=he_IL" target="_blank"><img src="http://khrolenok.ru/support_paypal.png" alt="PayPal" width="250" height="48"></a>
+</p>
