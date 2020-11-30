@@ -10,6 +10,8 @@
 
 A custom component to get current and next Israel Kan program.
 
+![Heat Map](./docs/lovelace.jpg)
+
 ### MANUAL INSTALLATION
 
 1. Download the `kan_program.zip` file from the
@@ -30,6 +32,13 @@ A custom component to get current and next Israel Kan program.
 ## Configuration
 
 Define the stations to be tracked in `configuration.yaml`
+
+
+|Parameter |Required|Description
+|:---|---|---
+| `station_id` | Yes | Radio / Tv station id (see below)
+| `name` | No | Alterntive sensor name
+| `scan_interval` | No | Fetch data interval (default 15 minutes)
 
 Example:
 
