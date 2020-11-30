@@ -5,34 +5,31 @@ https://github.com/eyalcha/radioprogram
 
 import asyncio
 import logging
-
-from datetime import timedelta, datetime
+from datetime import datetime, timedelta
 
 import aiohttp
 import async_timeout
-
 import homeassistant.helpers.config_validation as cv
 import voluptuous as vol
-
 from homeassistant.components.sensor import PLATFORM_SCHEMA
-from homeassistant.const import ATTR_ATTRIBUTION, CONF_SCAN_INTERVAL, CONF_NAME
+from homeassistant.const import ATTR_ATTRIBUTION, CONF_NAME, CONF_SCAN_INTERVAL
 from homeassistant.helpers.aiohttp_client import async_get_clientsession
 from homeassistant.helpers.entity import Entity, async_generate_entity_id
 from homeassistant.helpers.update_coordinator import DataUpdateCoordinator, UpdateFailed
 
 from .const import (
+    ATTR_CHAPTER_NUMBER,
+    ATTR_DESCRIPTION,
+    ATTR_END_TIME,
+    ATTR_NEXT,
+    ATTR_START_TIME,
+    ATTR_STATION_NAME,
+    ATTRIBUTION,
+    BASE_URL_GUIDE,
+    CONF_STATION_ID,
     DEFAULT_ICON,
     DOMAIN,
-    BASE_URL_GUIDE,
     STATION_NAME,
-    CONF_STATION_ID,
-    ATTR_NEXT,
-    ATTR_STATION_NAME,
-    ATTR_DESCRIPTION,
-    ATTR_START_TIME,
-    ATTR_END_TIME,
-    ATTR_CHAPTER_NUMBER,
-    ATTRIBUTION,
     SERVICE_REFRESH,
 )
 
@@ -64,9 +61,7 @@ async def async_setup_platform(
     await coordinator.async_refresh()
 
     sensors = []
-    sensors.append(
-        KanProgramSensor(hass, coordinator, name, station_id)
-    )
+    sensors.append(KanProgramSensor(hass, coordinator, name, station_id))
 
     # The True param fetches data first time before being written to HA
     async_add_entities(sensors, True)
@@ -100,7 +95,9 @@ class KanProgramSensor(Entity):
         self._name = name
         self._station_id = station_id
         self._coordinator = coordinator
-        self.entity_id = async_generate_entity_id(ENTITY_ID_FORMAT, name.lower().replace(" ", "_"), hass=hass)
+        self.entity_id = async_generate_entity_id(
+            ENTITY_ID_FORMAT, name.lower().replace(" ", "_"), hass=hass
+        )
         _LOGGER.debug("Created %s", self.entity_id)
 
     @property
@@ -137,25 +134,25 @@ class KanProgramSensor(Entity):
         current_program = None
         next_program = None
         for p in programs:
-            time_start = datetime.strptime(p['start_time'], '%Y-%m-%dT%H:%M:%S')
-            time_end = datetime.strptime(p['end_time'], '%Y-%m-%dT%H:%M:%S')
+            time_start = datetime.strptime(p["start_time"], "%Y-%m-%dT%H:%M:%S")
+            time_end = datetime.strptime(p["end_time"], "%Y-%m-%dT%H:%M:%S")
             if time_start <= datetime.now() < time_end:
                 current_program = p
             if time_start > datetime.now() and next_program is None:
                 next_program = p
         # Set sensor state
         if current_program:
-            self._state = current_program['title']
+            self._state = current_program["title"]
         # Set attributes
         self._attributes[ATTR_ATTRIBUTION] = ATTRIBUTION
         self._attributes[ATTR_STATION_NAME] = STATION_NAME[str(self._station_id)]
         if current_program:
-            self._attributes[ATTR_DESCRIPTION] = current_program['live_desc']
-            self._attributes[ATTR_START_TIME] = current_program['start_time']
-            self._attributes[ATTR_END_TIME] = current_program['end_time']
-            self._attributes[ATTR_CHAPTER_NUMBER] = current_program['chapter_number']
+            self._attributes[ATTR_DESCRIPTION] = current_program["live_desc"]
+            self._attributes[ATTR_START_TIME] = current_program["start_time"]
+            self._attributes[ATTR_END_TIME] = current_program["end_time"]
+            self._attributes[ATTR_CHAPTER_NUMBER] = current_program["chapter_number"]
         if next_program:
-            self._attributes[ATTR_NEXT] = next_program['title']
+            self._attributes[ATTR_NEXT] = next_program["title"]
         _LOGGER.debug(current_program)
 
     @property
@@ -206,11 +203,13 @@ class KanProgramUpdateCoordinator(DataUpdateCoordinator):
         """Get the JSON data."""
         json = None
         try:
-            url = "{}?stationID={}&day={}".format(BASE_URL_GUIDE, self._station_id, datetime.today().strftime('%d/%m/%Y'))
+            url = "{}?stationID={}&day={}".format(
+                BASE_URL_GUIDE, self._station_id, datetime.today().strftime("%d/%m/%Y")
+            )
             _LOGGER.debug("Url = %s", url)
             async with async_timeout.timeout(DEFAULT_TIMEOUT, loop=self.loop):
                 response = await self.websession.get(url)
-                json = await response.json(content_type='text/html')
+                json = await response.json(content_type="text/html")
 
             # _LOGGER.debug("Data = %s", json)
             self.last_update_success = True

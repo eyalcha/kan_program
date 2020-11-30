@@ -23,17 +23,15 @@ ATTRIBUTION = "Data provided by kan.org.il"
 
 # Station name
 STATION_NAME = {
-  "1": "Kan 11",
-  "2": "Makan",
-  "3": "Kan ?",
-  "4": "Kan 88",
-  "5": "Kan Tarbut",
-  "6": "Kan Reka",
-  "8": "Kan Moreshet",
-  "7": "Kan Kol Hamusika",
-  "8": "Kan Bet",
-  "9": "Kan Gimel",
-  "10": "Kan ?",
+    "1": "Kan 11",
+    "2": "Makan",
+    "3": "Kan ?",
+    "4": "Kan 88",
+    "5": "Kan Tarbut",
+    "6": "Kan Reka",
+    "8": "Kan Moreshet",
+    "7": "Kan Kol Hamusika",
+    "8": "Kan Bet",
+    "9": "Kan Gimel",
+    "10": "Kan ?",
 }
-
-
