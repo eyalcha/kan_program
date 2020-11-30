@@ -3,6 +3,7 @@
     "domains": [
         "sensor"
     ],
+    "country": "IL",
     "iot_class": "cloud_poll",
     "render_readme": true
 }
