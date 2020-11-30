@@ -1,0 +1,4 @@
+# Describes the format of available services for kan_program
+
+refresh:
+  description: Refresh data for all the channels.

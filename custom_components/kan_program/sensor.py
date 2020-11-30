@@ -33,6 +33,7 @@ from .const import (
     ATTR_END_TIME,
     ATTR_CHAPTER_NUMBER,
     ATTRIBUTION,
+    SERVICE_REFRESH,
 )
 
 _LOGGER = logging.getLogger(__name__)
@@ -69,6 +70,19 @@ async def async_setup_platform(
 
     # The True param fetches data first time before being written to HA
     async_add_entities(sensors, True)
+
+    async def handle_refresh(_call):
+        """Refresh data."""
+        _LOGGER.info("Processing refresh")
+        await coordinator.async_request_refresh()
+
+    hass.services.async_register(
+        DOMAIN,
+        SERVICE_REFRESH,
+        handle_refresh,
+    )
+
+    _LOGGER.debug("Refresh service registered")
 
 
 class KanProgramSensor(Entity):

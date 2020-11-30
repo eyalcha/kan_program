@@ -3,6 +3,8 @@
 DEFAULT_ICON = "mdi:radio"
 DOMAIN = "kan_program"
 
+SERVICE_REFRESH = "refresh"
+
 BASE_URL_GUIDE = "https://www.kan.org.il/tv-guide/tv_guidePrograms.ashx"
 BASE_URL_PICTURES = "https://kanweb.blob.core.windows.net/download/pictures"
 
