@@ -57,13 +57,14 @@ icon: 'mdi:radio'
 
 The component also exposes the service kan_prohgram.refresh which will refresh all the data.
 
-## Kan Stations id's
+## Station id
+
+The following Kan stations supported:
 
 Id | Station
 ---|---
 1  | Kan 11
 2  | Makan
-3  |
 4  | Kan 88
 5  | Kan Tarbut
 6  | Kan Reka
@@ -71,7 +72,6 @@ Id | Station
 7  | Kan Kol Hamusika
 8  | Kan Bet
 9  | Kan Gimel
-10 | Kan
 
 ---
 
