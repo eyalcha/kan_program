@@ -64,7 +64,7 @@ icon: 'mdi:radio'
 
 ## Services
 
-The component also exposes the service kan_prohgram.refresh which will refresh all the data.
+The component also exposes the service kan_program.refresh which will refresh all the data.
 
 ## Station id
 

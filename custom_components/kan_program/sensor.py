@@ -230,4 +230,4 @@ class KanProgramUpdateCoordinator(DataUpdateCoordinator):
                 raise ValueError(json["error"]["info"])
 
         self._data = json
-        _LOGGER.info("Data updated")
+        _LOGGER.debug("Data updated")
