@@ -1,6 +1,7 @@
 {
   "domain": "kan_program",
   "name": "Kan Program",
+  "version": "1.0.1",
   "documentation": "https://github.com/eyalcha/kan_program",
   "requirements": [],
   "dependencies": [],
